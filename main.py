@@ -31,4 +31,6 @@ for subdir, dirs, files in os.walk(cwd):
 for index in range(0, repository_filepaths.__len__()):
     os.chdir(repository_filepaths[index])
     print(os.popen("git remote rename origin old_origin").read())
-    print(os.popen("git push --set-upstream {0}{1}.git all".format(GITLAB_DOMAIN, repository_name)).read())
+    print(os.popen("git add .").read())
+    print(os.popen("git commit -m \"Final Commit\"").read())
+    print(os.popen("git push --set-upstream {0}{1}.git".format(GITLAB_DOMAIN, repository_names[index])).read())
