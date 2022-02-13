@@ -5,11 +5,9 @@ GITLAB_DOMAIN = "git@192.168.0.69:SGIBB98/"
 
 cwd = os.getcwd()
 print("Current working directory: {0}".format(cwd))
+folder_path = input("Enter the filepath for which you want to start looking for git repositories")
+os.chdir(folder_path)
 
-path_parent = os.path.dirname(os.getcwd())
-os.chdir(path_parent)
-cwd = os.getcwd()
-print("Current working directory: {0}".format(cwd))
 
 repository_filepaths = []
 repository_names = []
