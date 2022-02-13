@@ -26,9 +26,12 @@ for subdir, dirs, files in os.walk(cwd):
             repository_names.append(repository_name)
             print("-----------------------------------")
 
+print("Uploading to new Remote Repository")
 for index in range(0, repository_filepaths.__len__()):
     os.chdir(repository_filepaths[index])
     print(os.popen("git remote rename origin old_origin").read())
     print(os.popen("git add .").read())
     print(os.popen("git commit -m \"Final Commit\"").read())
     print(os.popen("git push --set-upstream {0}{1}.git".format(GITLAB_DOMAIN, repository_names[index])).read())
+
+print("DONE :D")
