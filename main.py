@@ -7,7 +7,7 @@ cwd = os.getcwd()
 print("Current working directory: {0}".format(cwd))
 folder_path = input("Enter the filepath for which you want to start looking for git repositories")
 os.chdir(folder_path)
-
+cwd = os.getcwd()
 
 repository_filepaths = []
 repository_names = []
