@@ -37,6 +37,8 @@ for subdir, dirs, files in os.walk(cwd):
 os.chdir(root_dir)
 f = open("Repositories.txt", "a")
 for index in range(0, repository_filepaths.__len__()):
+    if repository_names[index].__contains__("MT3"):
+        print("HERE")
     os.chdir(repository_filepaths[index])
     print("Uploading to new Remote Repository")
     print("Current Working Directory:{0}".format(repository_filepaths[index]))
