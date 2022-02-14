@@ -5,7 +5,7 @@ import time
 GITLAB_DOMAIN = "git@192.168.0.69:SGIBB98/"
 MAX_COUNT = 10000000
 counter = 0
-
+root_dir = os.getcwd()
 cwd = os.getcwd()
 print("Current working directory: {0}".format(cwd))
 folder_path = input("Enter the filepath for which you want to start looking for git repositories:")
@@ -33,7 +33,7 @@ for subdir, dirs, files in os.walk(cwd):
             print("Im Still going!)")
             counter = 0
         counter += 1
-
+os.chdir(root_dir)
 f = open("Repositories.txt", "a")
 for index in range(0, repository_filepaths.__len__()):
     os.chdir(repository_filepaths[index])
