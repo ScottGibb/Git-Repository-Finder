@@ -2,10 +2,12 @@ import os
 import subprocess
 
 GITLAB_DOMAIN = "git@192.168.0.69:SGIBB98/"
+MAX_COUNT = 10000000
+counter =0
 
 cwd = os.getcwd()
 print("Current working directory: {0}".format(cwd))
-folder_path = input("Enter the filepath for which you want to start looking for git repositories")
+folder_path = input("Enter the filepath for which you want to start looking for git repositories:")
 os.chdir(folder_path)
 cwd = os.getcwd()
 
@@ -25,13 +27,20 @@ for subdir, dirs, files in os.walk(cwd):
             print("Git repository Name: " + repository_name)
             repository_names.append(repository_name)
             print("-----------------------------------")
+        if counter == MAX_COUNT:
+            print("Im Still going!)")
+            counter = 0
+        counter += 1
 
-print("Uploading to new Remote Repository")
 for index in range(0, repository_filepaths.__len__()):
     os.chdir(repository_filepaths[index])
+    print("Uploading to new Remote Repository")
+    print("Current Working Directory:{0}".format(repository_filepaths[index]))
     print(os.popen("git remote rename origin old_origin").read())
     print(os.popen("git add .").read())
     print(os.popen("git commit -m \"Final Commit:{0}\"".format(repository_filepaths[index])).read())
-    print(os.popen("git push --set-upstream {0}{1}.git".format(GITLAB_DOMAIN, repository_names[index])).read())
+    print(os.popen("git remote add origin {0}{1}.git".format(GITLAB_DOMAIN, repository_names[index])).read())
+    print(os.popen("git push origin --all").read())
+    print(os.popen("git push origin --tags").read())
 
 print("DONE :D")
