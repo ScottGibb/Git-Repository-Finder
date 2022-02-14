@@ -33,6 +33,7 @@ for subdir, dirs, files in os.walk(cwd):
             print("Im Still going!)")
             counter = 0
         counter += 1
+
 os.chdir(root_dir)
 f = open("Repositories.txt", "a")
 for index in range(0, repository_filepaths.__len__()):
@@ -45,7 +46,6 @@ for index in range(0, repository_filepaths.__len__()):
     print(os.popen("git remote add origin {0}{1}.git".format(GITLAB_DOMAIN, repository_names[index])).read())
     print(os.popen("git push origin --all").read())
     print(os.popen("git push origin --tags").read())
-    time.sleep(10)
     f.write(repository_names[index])
 
 f.close()
