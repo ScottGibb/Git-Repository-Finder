@@ -4,7 +4,7 @@ import time
 
 GITLAB_DOMAIN = "git@192.168.0.69:SGIBB98/"
 MAX_COUNT = 10000000
-counter =0
+counter = 0
 
 cwd = os.getcwd()
 print("Current working directory: {0}".format(cwd))
@@ -25,6 +25,7 @@ for subdir, dirs, files in os.walk(cwd):
             print("Git repository Found: " + filepath)
             endIndex = subdir.rfind(os.sep)
             repository_name = subdir[endIndex + 1:subdir.__len__()]
+            repository_name = repository_name.replace(" ", "-")
             print("Git repository Name: " + repository_name)
             repository_names.append(repository_name)
             print("-----------------------------------")
@@ -33,6 +34,7 @@ for subdir, dirs, files in os.walk(cwd):
             counter = 0
         counter += 1
 
+f = open("Repositories.txt", "a")
 for index in range(0, repository_filepaths.__len__()):
     os.chdir(repository_filepaths[index])
     print("Uploading to new Remote Repository")
@@ -43,6 +45,8 @@ for index in range(0, repository_filepaths.__len__()):
     print(os.popen("git remote add origin {0}{1}.git".format(GITLAB_DOMAIN, repository_names[index])).read())
     print(os.popen("git push origin --all").read())
     print(os.popen("git push origin --tags").read())
-    time.sleep(60)
+    time.sleep(10)
+    f.write(repository_names[index])
 
+f.close()
 print("DONE :D")
