@@ -12,15 +12,19 @@ folder_path = input("Enter the filepath for which you want to start looking for 
 os.chdir(folder_path)
 cwd = os.getcwd()
 
+"""
+Locate repositories
+"""
 repository_filepaths = []
 repository_names = []
-
+f = open("repository_filepaths", "a")
 print("Starting folder scan:")
 for subdir, dirs, files in os.walk(cwd):
     for dir in dirs:
         if dir.endswith(".git"):
             filepath = subdir + os.sep
             repository_filepaths.append(filepath)
+            f.write(filepath+"\n")
             print("-----------------------------------")
             print("Git repository Found: " + filepath)
             endIndex = subdir.rfind(os.sep)
@@ -33,7 +37,13 @@ for subdir, dirs, files in os.walk(cwd):
             print("Im Still going!)")
             counter = 0
         counter += 1
+f.close()
+print("Found {0} repositories".format(repository_filepaths.__len__()))
 
+
+"""
+Update repositories
+"""
 os.chdir(root_dir)
 f = open("Repositories.txt", "a")
 for index in range(0, repository_filepaths.__len__()):
