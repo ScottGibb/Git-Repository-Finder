@@ -2,12 +2,16 @@ import os
 import subprocess
 import time
 
-GITLAB_DOMAIN = "git@192.168.0.69:SGIBB98/"
 MAX_COUNT = 10000000
 counter = 0
 root_dir = os.getcwd()
 cwd = os.getcwd()
+
+"""
+User Input
+"""
 print("Current working directory: {0}".format(cwd))
+gitlab_domain = input("Please enter the domain of the remote you want to push too:")
 folder_path = input("Enter the filepath for which you want to start looking for git repositories:")
 os.chdir(folder_path)
 cwd = os.getcwd()
@@ -55,7 +59,7 @@ for index in range(0, repository_filepaths.__len__()):
     print(os.popen("git remote rename origin old_origin").read())
     print(os.popen("git add .").read())
     print(os.popen("git commit -m \"Final Commit:{0}\"".format(repository_filepaths[index])).read())
-    print(os.popen("git remote add origin {0}{1}.git".format(GITLAB_DOMAIN, repository_names[index])).read())
+    print(os.popen("git remote add origin {0}{1}.git".format(gitlab_domain, repository_names[index])).read())
     print(os.popen("git push origin --all").read())
     print(os.popen("git push origin --tags").read())
     f.write(repository_names[index])
